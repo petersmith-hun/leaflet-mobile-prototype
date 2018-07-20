@@ -1,4 +1,4 @@
-package hu.psprog.leaflet.mobile;
+package hu.psprog.leaflet.mobile.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import hu.psprog.leaflet.api.rest.response.entry.EntryDataModel;
 import hu.psprog.leaflet.api.rest.response.entry.EntryListDataModel;
+import hu.psprog.leaflet.mobile.R;
 
 import java.util.Collections;
 import java.util.List;
@@ -49,7 +50,7 @@ public class EntryItemAdapter extends BaseAdapter {
 
         View rowView = convertView;
         if (Objects.isNull(rowView)) {
-            rowView = layoutInflater.inflate(R.layout.list_view_item, null);
+            rowView = layoutInflater.inflate(R.layout.list_view_item, parent, false);
         }
 
         EntryDataModel entryDataModel = (EntryDataModel) getItem(position);
