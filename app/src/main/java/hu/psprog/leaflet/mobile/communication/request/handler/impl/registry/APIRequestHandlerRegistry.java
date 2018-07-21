@@ -4,19 +4,24 @@ import android.content.Intent;
 import hu.psprog.leaflet.mobile.communication.exception.APICallException;
 import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestAction;
 import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestHandler;
-import hu.psprog.leaflet.mobile.communication.request.handler.impl.PublicEntriesAPIRequestHandler;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static hu.psprog.leaflet.mobile.config.dagger.module.APIRequestHandlerModule.API_REQUEST_HANDLER_LIST_DEPENDENCY;
 
 /**
  * @author Peter Smith
  */
+@Singleton
 public class APIRequestHandlerRegistry {
 
     private static final String UNRECOGNIZED_ACTION_MESSAGE = "Provided API request action [%s] cannot be recognized.";
@@ -24,8 +29,9 @@ public class APIRequestHandlerRegistry {
 
     private Map<APIRequestAction, APIRequestHandler> handlerMapping;
 
-    public APIRequestHandlerRegistry() {
-        handlerMapping = Stream.of(new PublicEntriesAPIRequestHandler())
+    @Inject
+    public APIRequestHandlerRegistry(@Named(API_REQUEST_HANDLER_LIST_DEPENDENCY) List<APIRequestHandler> apiRequestHandlerList) {
+        handlerMapping = apiRequestHandlerList.stream()
                 .collect(Collectors.toMap(APIRequestHandler::assignedAction, Function.identity()));
     }
 

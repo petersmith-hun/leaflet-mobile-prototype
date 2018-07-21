@@ -7,15 +7,20 @@ import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestAction;
 import hu.psprog.leaflet.mobile.communication.response.ResultReceiverCallback;
 import hu.psprog.leaflet.mobile.communication.service.EntryAPIRequestService;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * @author Peter Smith
  */
+@Singleton
 public class EntryAPIRequestServiceImpl implements EntryAPIRequestService {
 
     private IntentServiceCallFactory intentServiceCallFactory;
 
-    public EntryAPIRequestServiceImpl() {
-        this.intentServiceCallFactory = new IntentServiceCallFactory();
+    @Inject
+    public EntryAPIRequestServiceImpl(IntentServiceCallFactory intentServiceCallFactory) {
+        this.intentServiceCallFactory = intentServiceCallFactory;
     }
 
     @Override

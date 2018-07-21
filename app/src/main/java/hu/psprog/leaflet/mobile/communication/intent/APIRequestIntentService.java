@@ -7,7 +7,9 @@ import android.os.ResultReceiver;
 import android.support.annotation.Nullable;
 import hu.psprog.leaflet.mobile.communication.exception.APICallException;
 import hu.psprog.leaflet.mobile.communication.request.handler.impl.registry.APIRequestHandlerRegistry;
+import hu.psprog.leaflet.mobile.config.dagger.LeafletMobileApplication;
 
+import javax.inject.Inject;
 import java.io.Serializable;
 
 import static hu.psprog.leaflet.mobile.communication.domain.common.Constants.BUNDLE_PARAMETER_RESULT;
@@ -22,11 +24,17 @@ public class APIRequestIntentService extends IntentService {
 
     private static final String INTENT_SERVICE_NAME = "api-request-intent-service";
 
-    private APIRequestHandlerRegistry apiRequestHandlerRegistry;
+    @Inject
+    APIRequestHandlerRegistry apiRequestHandlerRegistry;
 
     public APIRequestIntentService() {
         super(INTENT_SERVICE_NAME);
-        apiRequestHandlerRegistry = new APIRequestHandlerRegistry();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ((LeafletMobileApplication) getApplicationContext()).getApplicationComponent().inject(this);
     }
 
     @Override

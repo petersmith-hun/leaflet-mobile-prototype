@@ -8,6 +8,8 @@ import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestAction;
 import hu.psprog.leaflet.mobile.communication.response.APIRequestResultReceiver;
 import hu.psprog.leaflet.mobile.communication.response.ResultReceiverCallback;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.Serializable;
 
 import static hu.psprog.leaflet.mobile.communication.domain.common.Constants.INTENT_PARAMETER_CALL_PARAMETERS;
@@ -16,9 +18,14 @@ import static hu.psprog.leaflet.mobile.communication.domain.common.Constants.INT
 /**
  * @author Peter Smith
  */
+@Singleton
 public class IntentServiceCallFactory {
 
     private static final Class<APIRequestIntentService> API_REQUEST_INTENT_SERVICE_CLASS = APIRequestIntentService.class;
+
+    @Inject
+    public IntentServiceCallFactory() {
+    }
 
     void callIntentService(Context context, ResultReceiverCallback<? extends Serializable> callback, APIRequestAction action, Serializable parameters) {
         context.startService(createIntent(context, callback, action, parameters));
