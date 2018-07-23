@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LeafletMobilePOC</string>
     <string name="placeholder">placeholder</string>
+    <string name="title_activity_entry_details">EntryDetailsActivity</string>
 </resources>

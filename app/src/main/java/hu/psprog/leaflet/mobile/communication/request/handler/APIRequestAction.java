@@ -8,7 +8,8 @@ import java.util.stream.Collectors;
  * @author Peter Smith
  */
 public enum APIRequestAction {
-    PUBLIC_ENTRIES;
+    PUBLIC_ENTRIES,
+    ENTRY_DETAILS;
 
     private final static List<String> API_REQUEST_ACTION_NAME_LIST = Arrays.stream(values())
             .map(APIRequestAction::name)

@@ -3,11 +3,12 @@ package hu.psprog.leaflet.mobile.config.dagger.module;
 import dagger.Module;
 import dagger.Provides;
 import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestHandler;
+import hu.psprog.leaflet.mobile.communication.request.handler.impl.EntryDetailsAPIRequestHandler;
 import hu.psprog.leaflet.mobile.communication.request.handler.impl.PublicEntriesAPIRequestHandler;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public class APIRequestHandlerModule {
     @Provides
     @Named(API_REQUEST_HANDLER_LIST_DEPENDENCY)
     public List<APIRequestHandler> provideApiRequestHandlerList() {
-        return Collections.singletonList(new PublicEntriesAPIRequestHandler());
+        return Arrays.asList(
+                new PublicEntriesAPIRequestHandler(),
+                new EntryDetailsAPIRequestHandler());
     }
 }
