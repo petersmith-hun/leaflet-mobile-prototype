@@ -2,4 +2,6 @@
     <string name="app_name">LeafletMobilePOC</string>
     <string name="placeholder">placeholder</string>
     <string name="title_activity_entry_details">EntryDetailsActivity</string>
+    <string name="detailsPageCSSTag">
+        <![CDATA[<link rel=\"stylesheet\" type=\"text/css\" href=\"css/details_page.css\" />]]></string>
 </resources>
