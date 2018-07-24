@@ -2,6 +2,7 @@ package hu.psprog.leaflet.mobile.config.dagger.module;
 
 import dagger.Module;
 import dagger.Provides;
+import hu.psprog.leaflet.bridge.service.EntryBridgeService;
 import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestHandler;
 import hu.psprog.leaflet.mobile.communication.request.handler.impl.EntryDetailsAPIRequestHandler;
 import hu.psprog.leaflet.mobile.communication.request.handler.impl.PublicEntriesAPIRequestHandler;
@@ -22,9 +23,9 @@ public class APIRequestHandlerModule {
     @Singleton
     @Provides
     @Named(API_REQUEST_HANDLER_LIST_DEPENDENCY)
-    public List<APIRequestHandler> provideApiRequestHandlerList() {
+    public List<APIRequestHandler> provideApiRequestHandlerList(EntryBridgeService entryBridgeService) {
         return Arrays.asList(
-                new PublicEntriesAPIRequestHandler(),
-                new EntryDetailsAPIRequestHandler());
+                new PublicEntriesAPIRequestHandler(entryBridgeService),
+                new EntryDetailsAPIRequestHandler(entryBridgeService));
     }
 }

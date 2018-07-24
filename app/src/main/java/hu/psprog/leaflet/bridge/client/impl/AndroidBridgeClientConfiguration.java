@@ -1,44 +1,40 @@
 package hu.psprog.leaflet.bridge.client.impl;
 
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
+import dagger.Module;
+import dagger.Provides;
 import hu.psprog.leaflet.bridge.client.BridgeClient;
 import hu.psprog.leaflet.bridge.client.request.strategy.CallStrategy;
 import hu.psprog.leaflet.bridge.client.request.strategy.impl.DeleteCallStrategy;
 import hu.psprog.leaflet.bridge.client.request.strategy.impl.GetCallStrategy;
 import hu.psprog.leaflet.bridge.client.request.strategy.impl.PostCallStrategy;
 import hu.psprog.leaflet.bridge.client.request.strategy.impl.PutCallStrategy;
-import org.glassfish.hk2.utilities.binding.AbstractBinder;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Peter Smith
  */
-public class AndroidBridgeClientFactory {
+@Module
+public class AndroidBridgeClientConfiguration {
 
-    private BridgeClient bridgeClient;
-
-    public BridgeClient createBridgeClient() {
-
-        if (Objects.isNull(bridgeClient)) {
-            bridgeClient = new BridgeClientImpl(createWebTarget(), getInvocationFactory(), getResponseReader());
-        }
-
-        return bridgeClient;
+    @Provides
+    public BridgeClient createBridgeClient(InvocationFactory invocationFactory, ResponseReader responseReader) {
+        return new BridgeClientImpl(createWebTarget(), invocationFactory, responseReader);
     }
 
-    private ResponseReader getResponseReader() {
+    @Provides
+    public ResponseReader responseReader() {
         return new ResponseReader(new MockHttpServletResponse());
     }
 
-    private InvocationFactory getInvocationFactory() {
+    @Provides
+    public InvocationFactory invocationFactory() {
         return new InvocationFactory(new MockRequestAuthentication(), getCallStrategies(), new MockHttpServletRequest());
     }
-
 
     private WebTarget createWebTarget() {
         return ClientBuilder.newBuilder()

@@ -3,7 +3,7 @@ package hu.psprog.leaflet.mobile.communication.request.handler.impl;
 import android.content.Intent;
 import hu.psprog.leaflet.bridge.client.domain.OrderBy;
 import hu.psprog.leaflet.bridge.client.exception.CommunicationFailureException;
-import hu.psprog.leaflet.bridge.service.impl.BridgeServiceRegistry;
+import hu.psprog.leaflet.bridge.service.EntryBridgeService;
 import hu.psprog.leaflet.mobile.communication.domain.common.Pagination;
 import hu.psprog.leaflet.mobile.communication.exception.APICallException;
 import hu.psprog.leaflet.mobile.communication.request.handler.APIRequestAction;
@@ -16,13 +16,18 @@ import java.io.Serializable;
  */
 public class PublicEntriesAPIRequestHandler extends AbstractPaginationCapableAPIRequestHandler<OrderBy.Entry> implements APIRequestHandler {
 
+    private EntryBridgeService entryBridgeService;
+
+    public PublicEntriesAPIRequestHandler(EntryBridgeService entryBridgeService) {
+        this.entryBridgeService = entryBridgeService;
+    }
+
     @Override
     public Serializable handleRequest(Intent intent) {
 
         try {
             Pagination pagination = extractPagination(intent);
-            // TODO bridge dagger configuration
-            return new BridgeServiceRegistry().getEntryBridgeService()
+            return entryBridgeService
                     .getPageOfPublicEntries(pagination.getPage(), pagination.getLimit(), convertOrderBy(pagination), convertOrderDirection(pagination))
                     .getBody();
         } catch (CommunicationFailureException e) {
