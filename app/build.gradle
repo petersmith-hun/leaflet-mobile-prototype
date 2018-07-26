@@ -15,6 +15,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+
+        buildConfigField "String", "API_HOST_URL", API_HOST_URL
+        buildConfigField "String", "API_CLIENT_ID", API_CLIENT_ID
     }
     buildTypes {
         release {
@@ -40,9 +43,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    implementation ('hu.psprog.leaflet:backend-rest-client:1.1.0') {
+    implementation ('hu.psprog.leaflet:backend-rest-client:1.2.0') {
         exclude module: 'javax.inject'
         exclude module: 'aopalliance-repackaged'
+        exclude module: 'rcp-request-adapters'
     }
     implementation 'javax.servlet:javax.servlet-api:3.1.0'
     implementation 'ch.qos.logback:logback-classic:1.2.3'

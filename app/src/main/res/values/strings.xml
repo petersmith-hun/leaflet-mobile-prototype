@@ -3,5 +3,5 @@
     <string name="placeholder">placeholder</string>
     <string name="title_activity_entry_details">EntryDetailsActivity</string>
     <string name="detailsPageCSSTag">
-        <![CDATA[<link rel=\"stylesheet\" type=\"text/css\" href=\"css/details_page.css\" />]]></string>
+        <![CDATA[<link rel=\"stylesheet\" type=\"text/css\" href=\"css/details_page.css\" /><link rel=\"stylesheet\" type=\"text/css\" href=\"css/calmdown.min.css\" />]]></string>
 </resources>
