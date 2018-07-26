@@ -28,8 +28,7 @@ public class PublicEntriesAPIRequestHandler extends AbstractPaginationCapableAPI
         try {
             Pagination pagination = extractPagination(intent);
             return entryBridgeService
-                    .getPageOfPublicEntries(pagination.getPage(), pagination.getLimit(), convertOrderBy(pagination), convertOrderDirection(pagination))
-                    .getBody();
+                    .getPageOfPublicEntries(pagination.getPage(), pagination.getLimit(), convertOrderBy(pagination), convertOrderDirection(pagination));
         } catch (CommunicationFailureException e) {
             throw new APICallException("failed to call public entries endpoint", e);
         }

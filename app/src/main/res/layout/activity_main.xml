@@ -7,6 +7,33 @@
         android:layout_height="match_parent"
         tools:context="hu.psprog.leaflet.mobile.MainActivity">
 
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_media_rew"
+            android:id="@+id/pagingPrevious"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@+id/pagingNext"
+            app:backgroundTint="@android:color/darker_gray"
+            app:rippleColor="@android:color/darker_gray"
+            android:visibility="invisible"/>
+
+    <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_media_ff"
+            android:id="@+id/pagingNext"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            app:backgroundTint="@android:color/darker_gray"
+            android:visibility="invisible" />
     <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/entryList">

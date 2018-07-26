@@ -12,7 +12,7 @@ import hu.psprog.leaflet.mobile.communication.response.ResultReceiverCallback;
  */
 public interface EntryAPIRequestService {
 
-    void requestPublicEntries(Context context, ResultReceiverCallback<EntryListDataModel> callback, Pagination pagination);
+    void requestPublicEntries(Context context, ResultReceiverCallback<WrapperBodyDataModel<EntryListDataModel>> callback, Pagination pagination);
 
     void requestEntryDetails(Context context, ResultReceiverCallback<WrapperBodyDataModel<ExtendedEntryDataModel>> callback, String entryLink);
 }

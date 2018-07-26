@@ -26,7 +26,7 @@ public class EntryAPIRequestServiceImpl implements EntryAPIRequestService {
     }
 
     @Override
-    public void requestPublicEntries(Context context, ResultReceiverCallback<EntryListDataModel> callback, Pagination pagination) {
+    public void requestPublicEntries(Context context, ResultReceiverCallback<WrapperBodyDataModel<EntryListDataModel>> callback, Pagination pagination) {
         intentServiceCallFactory.callIntentService(context, callback, APIRequestAction.PUBLIC_ENTRIES, pagination);
     }
 
